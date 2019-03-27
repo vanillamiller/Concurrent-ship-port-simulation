@@ -17,6 +17,7 @@ public class WaitZone {
         while(this.numShipsWaiting() >= MAX_SHIPS) {
             try{
                 wait();
+                System.out.println("waiting at arrive");
             } catch(InterruptedException e){}
         }
         waitingShips.add(arrivedShip);
@@ -32,6 +33,7 @@ public class WaitZone {
         while(this.numShipsWaiting() < 1){
             try{
                 wait();
+                System.out.println("waiting at depart");
             }catch(InterruptedException e){}
         }
         Ship departingShip = waitingShips.get(0);
@@ -48,6 +50,7 @@ public class WaitZone {
         while(this.numShipsWaiting() < 1){
             try{
                 wait();
+                System.out.println("waiting at boarding procedure");
             }catch(InterruptedException e){}
         }
         Ship acquiredShip = waitingShips.get(0);

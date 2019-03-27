@@ -131,7 +131,7 @@ public class Pilot extends Thread {
     public void releaseShip() {
         String msg = String.format("%s has released %s", this.toString(), this.ship.toString());
         this.ship = null;
-        this.departureZone.depart();
+//        this.departureZone.depart();
         this.setStatus("waiting for ship");
         System.out.println(msg);
     }
