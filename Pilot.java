@@ -120,11 +120,20 @@ public class Pilot extends Thread {
         this.ship = ship;
     }
 
-    public void releaseShip() {
+    private void releaseShip() {
         String msg = String.format("%s has released %s", this.toString(), this.ship.toString());
         this.ship = null;
         this.setStatus("waiting for ship");
         System.out.println(msg);
+    }
+
+    public void engageDepartureProcedure(){
+        Ship departingShip = this.ship;
+        this.releaseShip();
+        tugs.returnTugs(this, this.acquiredTugs);
+        this.departureZone.arrive(departingShip);
+        this.setStatus("departure zone");
+        this.setStatus("waiting for ship");
     }
 
 
@@ -149,14 +158,7 @@ public class Pilot extends Thread {
                 this.approachZone();
             }
             if (this.status == Statuses.WAITING_TO_DEPART) {
-                this.departureZone.arrive(this.ship);
-                this.setStatus("departure zone");
-                this.releaseShip();
-                tugs.returnTugs(this, this.acquiredTugs);
-
-
-
-
+                this.engageDepartureProcedure();
             }
         }
     }

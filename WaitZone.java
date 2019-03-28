@@ -40,7 +40,6 @@ public class WaitZone {
         }
         waitingShips.add(arrivedShip);
         if (this.name.equals("arrival")) {
-
             String arrivalMsg = String.format("%s arrives at arrival zone", arrivedShip.toString());
             System.out.println(arrivalMsg);
         }
