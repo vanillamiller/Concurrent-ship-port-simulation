@@ -1,0 +1,37 @@
+I was inspired to construct this system in a similar way to the bank account from the lecture on monitors, as the
+spec described the zones and tugs as monitors. While the pilot had and enumerated state where transitions were controlled
+in its run() process. These states (called Statuses in the implementation) reflected the possible states of the pilot
+when piloting a ship.
+
+I divided the tasks between between:
+CRITICAL:
+    - actions that had output, such that the interleving did not misallign the printed outut with the internal state,
+      where the time it took to execute these processes were taken out of the critical sections.
+        - shield being activated/deactivated
+        - reserving the berth, docking and undocking
+        - arriving and departing
+        - tug acquiring or returning
+NON-CRITICAL
+    - unloading
+    - travel times
+
+Setting up the system in this manner was easy enough, having WaitZone.arrive() wait if there were more than the number
+of max ships, and notify if a ship arrived. Whilst depart waited for a ship to be in the zone before departing, and
+notified others when a free space was available. The same with the tugs, where a pilot would request and wait for the
+correct amount of tugs and when returning the tugs would notify the waiting requesters.
+
+I conceptualized Berth as an extension of WaitZone, where only one ship could dock at a time. This was managed by a
+reservation monitor. This 'reserved' class variable was set to an int that was added or subtracted instead of the obvious
+boolean in case USS Emafor's berthing capacity was to be updated, they would merely need to change the MAX_SHIPS
+variable to enable such extension. This was overwritten from its superclass, which could lead to problems if the berth
+became larger than the arrival and departure zones as it calls the superclasses arrive when docking.
+
+Time delays such as unloading, docking/undocking and travel times were kept out of these synchronized methods/ critical
+sections so that the system would not be held up whilst the ships were travelling between destinations. The problem
+arose however that what would happen if the shield was to be activated while the docking time was executing. I solved
+this by adding a boolean variable to the berth class called docking in progress, which would prevent the operator from
+closing the shield whilst the ship was docking or undocking. This could lead to the USS Emafor being damaged in the
+real world so this is an issue with the system. Also, I noticed that sometimes the shield will open and the docked ship
+will not depart until it closes and opens again. I am not sure if this a problem with my monitors or just an unlucky
+combination of the loading time and shield opening and closing.
+

@@ -96,7 +96,7 @@ public class Pilot extends Thread {
 
         // jettison tugs
         tugs.returnTugs(this, numTugsToRelease);
-        String msg = String.format("%s is being unloaded", this.getShip());
+        String msg = String.format("%s being unloaded", this.getShip());
         System.out.println(msg);
 
         // unload ship (remove load)
@@ -185,7 +185,7 @@ public class Pilot extends Thread {
      * Triggers the pilot releasing the ship and outputs message
      */
     private void releaseShip() {
-        String msg = String.format("%s has released %s", this.toString(), this.ship.toString());
+        String msg = String.format("%s releases %s", this.toString(), this.ship.toString());
         this.ship = null;
         this.setStatus("waiting for ship");
         System.out.println(msg);

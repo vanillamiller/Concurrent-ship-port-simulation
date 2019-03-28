@@ -10,7 +10,8 @@ public class WaitZone {
     private volatile ArrayList<Ship> waitingShips = new ArrayList<Ship>();
 
     // Specs describe waitzones having a maximum amount of ships that can be at a zone at any one time
-    public final int MAX_SHIPS = 1;
+    // specs said set it to 1
+    public final int MAX_SHIPS = 2;
 
     /**
      * Constructor method that sets the waitzone's name. It was assumed that the names would be used for outputting the
@@ -82,7 +83,7 @@ public class WaitZone {
             }catch(InterruptedException e){}
         }
 
-        // get first ship in arraylist and remove it from waitingShips
+        // get first ship in arraylist
         Ship acquiredShip = waitingShips.get(0);
 
         // set pilots ship as this ship
@@ -90,7 +91,7 @@ public class WaitZone {
 
         // pilot is now in a ship in the arrival zone
         pilot.setStatus("arrival zone");
-        String msg = String.format("%s has acquired %s", pilot.toString(), acquiredShip.toString());
+        String msg = String.format("%s acquires %s", pilot.toString(), acquiredShip.toString());
         System.out.println(msg);
     }
 
