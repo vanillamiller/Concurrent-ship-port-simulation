@@ -5,7 +5,7 @@ public class WaitZone {
 
     private String name;
     private volatile ArrayList<Ship> waitingShips = new ArrayList<Ship>();
-    private final int MAX_SHIPS = 5;
+    private final int MAX_SHIPS = 2;
 
     /**
      * Constructor method that sets the waitzone's name. It was assumed that the names would be used for outputting the
@@ -40,7 +40,7 @@ public class WaitZone {
         }
         waitingShips.add(arrivedShip);
         if (this.name.equals("arrival")) {
-            System.out.println("currently in arrive: " + this.numShipsWaiting());
+
             String arrivalMsg = String.format("%s arrives at arrival zone", arrivedShip.toString());
             System.out.println(arrivalMsg);
         }
@@ -55,7 +55,7 @@ public class WaitZone {
         while(this.numShipsWaiting() < 1){
             try{
                 wait();
-                System.out.println("waiting at depart");
+
             }catch(InterruptedException e){}
         }
         Ship departingShip = waitingShips.get(0);
@@ -75,7 +75,7 @@ public class WaitZone {
     public synchronized void boardingProcedure(Pilot pilot){
         while(this.numShipsWaiting() < 1){
             try{
-                System.out.println("waiting at boarding procedure");
+
                 wait();
             }catch(InterruptedException e){}
         }

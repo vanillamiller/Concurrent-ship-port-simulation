@@ -32,27 +32,13 @@ public class Pilot extends Thread {
         this.arrivalZone.boardingProcedure(this);
     }
 
-//    public int getAcquiredTugs() {
-//        return acquiredTugs;
-//    }
-
     private void engageDockingProcedure() {
 
-        // will not be able to engage docking until it can reserve the berth (only one ship can reserve at a time)
+
         berth.reserve();
 
-        // will wait to allow enough time between debris storms to dock safely
-        int shieldDockingDelay = Math.abs(Params.DEBRIS_TIME - Params.DOCKING_TIME);
-
         // if shield is deployed wait
-        while (berth.shieldDeployed()) {
-            try {
-                sleep(shieldDockingDelay);
-            } catch (InterruptedException e) {
-            }
-        }
-
-        // engage docking
+        this.berth.isShieldDeployed();
         try {
             sleep(Params.DOCKING_TIME);
         } catch (InterruptedException e) {
@@ -63,19 +49,8 @@ public class Pilot extends Thread {
 
     private void engageUndockingProceedure() {
 
-            // wait enough time for shield to open and allow enough time to undock safely
-            int shieldDockingDelay = Math.abs(Params.DEBRIS_TIME - Params.UNDOCKING_TIME);
-
             // if shield is deployed wait
-            while (berth.shieldDeployed()) {
-                try {
-
-                    sleep(shieldDockingDelay);
-                } catch (InterruptedException e) {
-                }
-            }
-
-            // engage undocking
+            this.berth.isShieldDeployed();
             try {
                 sleep(Params.UNDOCKING_TIME);
             } catch (InterruptedException e) {
@@ -102,9 +77,9 @@ public class Pilot extends Thread {
         } catch (InterruptedException e) {
         }
         if (this.status == Statuses.ARRIVAL) {
-            this.status = Statuses.WAITING_TO_DOCK;
+            this.setStatus("waiting to dock");
         } else if (this.status == Statuses.UNDOCKED) {
-            this.status = Statuses.WAITING_TO_DEPART;
+            this.setStatus("waiting to depart");
         }
     }
 
@@ -122,6 +97,10 @@ public class Pilot extends Thread {
             this.status = Statuses.UNDOCKED;
         } else if (location.equals("docked")) {
             this.status = Statuses.DOCKED;
+        } else if (location.equals("waiting to dock")){
+            this.status = Statuses.WAITING_TO_DOCK;
+        } else if (location.equals("waiting to depart")){
+            this.status = Statuses.WAITING_TO_DEPART;
         }
     }
 
@@ -144,7 +123,6 @@ public class Pilot extends Thread {
     public void releaseShip() {
         String msg = String.format("%s has released %s", this.toString(), this.ship.toString());
         this.ship = null;
-//        this.departureZone.depart();
         this.setStatus("waiting for ship");
         System.out.println(msg);
     }
@@ -154,12 +132,7 @@ public class Pilot extends Thread {
         /* if there is a ship at arrival */
 
         while (true) {
-//            System.out.println(this.toString() + ": " + this.status);
-            System.out.println("arr: " + arrivalZone.numShipsWaiting());
-            System.out.println("dep: " + departureZone.numShipsWaiting());
-            System.out.println("dep: " + departureZone.numShipsWaiting() + " " + this.toString() + ": " + this.status);
             if (this.status == Statuses.WAITING_FOR_SHIP) {
-                System.out.println("in block");
                 this.acquireShip();
                 this.arrivalZone.depart();
                 this.approachZone();
@@ -177,7 +150,7 @@ public class Pilot extends Thread {
             }
             if (this.status == Statuses.WAITING_TO_DEPART) {
                 this.departureZone.arrive(this.ship);
-                this.status = Statuses.DEPARTURE;
+                this.setStatus("departure zone");
                 this.releaseShip();
                 tugs.returnTugs(this, this.acquiredTugs);
 

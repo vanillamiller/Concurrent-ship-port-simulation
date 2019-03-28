@@ -9,6 +9,7 @@
 public class Berth extends WaitZone{
 
     private volatile boolean shieldDeployed;
+    private volatile boolean dockingInProgress = false;
     private volatile boolean reserved = false;
 
     public Berth(String name) {
@@ -36,15 +37,12 @@ public class Berth extends WaitZone{
      * @param pilot
      */
     public synchronized void dockingProcedure(Pilot pilot) {
-        while (shieldDeployed){
-            try{
-                wait();
-            }catch(InterruptedException e){}
-        }
+
         this.arrive(pilot.getShip());
         String msg = String.format("%s docks at berth", pilot.getShip());
         System.out.println(msg);
         pilot.setStatus("docked");
+        this.dockingInProgress = false;
     }
 
     /**
@@ -53,16 +51,12 @@ public class Berth extends WaitZone{
      * @param pilot
      */
     public synchronized void undockingProcedure(Pilot pilot){
-        while (shieldDeployed) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-            }
-        }
+
         this.depart();
         this.reserved = false;
         String msg = String.format("%s undocks from berth", pilot.getShip());
         pilot.setStatus("undocked");
+        this.dockingInProgress = false;
         System.out.println(msg);
         notify();
 
@@ -83,8 +77,17 @@ public class Berth extends WaitZone{
         this.reserved = true;
     }
 
-    public boolean shieldDeployed(){
-        return shieldDeployed;
+    public synchronized void isShieldDeployed(){
+        while(shieldDeployed){
+            try{
+                wait();
+            }catch(InterruptedException e){}
+        }
+        this.dockingInProgress = true;
+    }
+
+    public boolean isDockingInProgress(){
+        return dockingInProgress;
     }
 
 

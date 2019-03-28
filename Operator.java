@@ -7,7 +7,9 @@ public class Operator extends Thread {
     }
 
     public void deployShield(){
-        this.berth.deployShield();
+        if(! this.berth.isDockingInProgress()) {
+            this.berth.deployShield();
+        }
         try{
             sleep(Params.DEBRIS_TIME);
         }catch(InterruptedException e){}

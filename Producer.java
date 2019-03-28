@@ -27,7 +27,7 @@ public class Producer extends Thread {
                 sleep(Params.arrivalLapse());
             } catch (InterruptedException e) {
                 this.interrupt();
-                System.out.println("producer interrupted");
+
             }
         }
     }

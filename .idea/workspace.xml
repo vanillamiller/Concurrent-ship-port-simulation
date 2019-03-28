@@ -2,10 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a4a92d0-1c52-4e5b-a42f-fbb5fdad9644" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Berth.java" beforeDir="false" afterPath="$PROJECT_DIR$/Berth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Consumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Consumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Operator.java" beforeDir="false" afterPath="$PROJECT_DIR$/Operator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Params.java" beforeDir="false" afterPath="$PROJECT_DIR$/Params.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pilot.java" beforeDir="false" afterPath="$PROJECT_DIR$/Pilot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Producer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Producer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/Ship.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tugs.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tugs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WaitZone.java" beforeDir="false" afterPath="$PROJECT_DIR$/WaitZone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/scaffold/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/scaffold/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/scaffold/Berth.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/scaffold/Berth.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/scaffold/Operator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/scaffold/Operator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/scaffold/Pilot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/scaffold/Pilot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/scaffold/Tugs.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/scaffold/Tugs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/scaffold/WaitZone.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/scaffold/WaitZone.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,12 +55,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="16483" />
+          <entry key="java" value="16944" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="16483" />
+          <entry key="JAVA" value="16944" />
         </counts>
       </usages-collector>
     </session>
@@ -66,7 +79,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tugs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
+            <state relative-caret-position="442">
               <caret line="44" column="4" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
               <folding>
                 <element signature="e#1279#1280#0" expanded="true" />
@@ -76,16 +89,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Berth.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
+            <state relative-caret-position="21">
+              <caret line="64" column="46" selection-start-line="64" selection-start-column="46" selection-end-line="64" selection-end-column="46" />
               <folding>
-                <element signature="e#210#211#0" expanded="true" />
-                <element signature="e#237#238#0" expanded="true" />
-                <element signature="e#2810#2811#0" expanded="true" />
-                <element signature="e#2829#2830#0" expanded="true" />
+                <element signature="e#464#465#0" expanded="true" />
+                <element signature="e#491#492#0" expanded="true" />
+                <element signature="e#2936#2937#0" expanded="true" />
+                <element signature="e#2957#2958#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,11 +116,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WaitZone.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="74" lean-forward="true" selection-start-line="6" selection-start-column="74" selection-end-line="6" selection-end-column="74" />
+            <state relative-caret-position="488">
+              <caret line="86" column="19" selection-start-line="86" selection-start-column="19" selection-end-line="86" selection-end-column="19" />
               <folding>
-                <element signature="e#363#364#0" expanded="true" />
-                <element signature="e#405#406#0" expanded="true" />
+                <element signature="e#730#731#0" expanded="true" />
+                <element signature="e#772#773#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,8 +129,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Operator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+            <state relative-caret-position="153">
+              <caret line="9" column="48" lean-forward="true" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
               <folding>
                 <element signature="e#98#99#0" expanded="true" />
                 <element signature="e#132#133#0" expanded="true" />
@@ -126,11 +139,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Pilot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="41">
-              <caret line="40" column="113" selection-start-line="40" selection-start-column="113" selection-end-line="40" selection-end-column="113" />
+            <state relative-caret-position="243">
+              <caret line="125" column="40" selection-start-line="125" selection-start-column="40" selection-end-line="125" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -156,8 +169,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Producer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="29" column="56" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
+            <state relative-caret-position="369">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
             </state>
           </provider>
         </entry>
@@ -185,7 +198,6 @@
       <find>arr</find>
       <find>acq</find>
       <find>waiting_to_doc</find>
-      <find>println</find>
       <find>BERTH</find>
       <find>s</find>
       <find>4</find>
@@ -193,11 +205,13 @@
       <find>acqu</find>
       <find>requ</find>
       <find>departure</find>
-      <find>print</find>
       <find>release</find>
       <find>dockin</find>
       <find>docking</find>
       <find>reserve</find>
+      <find>status =</find>
+      <find>print</find>
+      <find>println</find>
       <find>returnTugs</find>
     </findStrings>
   </component>
@@ -209,13 +223,13 @@
       <list>
         <option value="$PROJECT_DIR$/Ship.java" />
         <option value="$PROJECT_DIR$/Params.java" />
-        <option value="$PROJECT_DIR$/Operator.java" />
         <option value="$PROJECT_DIR$/Logger.java" />
-        <option value="$PROJECT_DIR$/Producer.java" />
-        <option value="$PROJECT_DIR$/Pilot.java" />
-        <option value="$PROJECT_DIR$/WaitZone.java" />
         <option value="$PROJECT_DIR$/Tugs.java" />
+        <option value="$PROJECT_DIR$/Operator.java" />
+        <option value="$PROJECT_DIR$/Producer.java" />
+        <option value="$PROJECT_DIR$/WaitZone.java" />
         <option value="$PROJECT_DIR$/Berth.java" />
+        <option value="$PROJECT_DIR$/Pilot.java" />
       </list>
     </option>
   </component>
@@ -260,7 +274,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553739572969" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553744428328" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="SDKs" />
@@ -311,13 +325,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72394000" />
+    <option name="totallyTimeSpent" value="74542000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2342282" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13355705" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -326,7 +340,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.16879432" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.19574468" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -398,13 +412,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Producer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="29" column="56" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Consumer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -419,38 +426,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Pilot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="40" column="113" selection-start-line="40" selection-start-column="113" selection-end-line="40" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Operator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
-          <folding>
-            <element signature="e#98#99#0" expanded="true" />
-            <element signature="e#132#133#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WaitZone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="74" lean-forward="true" selection-start-line="6" selection-start-column="74" selection-end-line="6" selection-end-column="74" />
-          <folding>
-            <element signature="e#363#364#0" expanded="true" />
-            <element signature="e#405#406#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tugs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
+        <state relative-caret-position="442">
           <caret line="44" column="4" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
           <folding>
             <element signature="e#1279#1280#0" expanded="true" />
@@ -466,16 +444,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Operator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="48" lean-forward="true" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+          <folding>
+            <element signature="e#98#99#0" expanded="true" />
+            <element signature="e#132#133#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Producer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WaitZone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="86" column="19" selection-start-line="86" selection-start-column="19" selection-end-line="86" selection-end-column="19" />
+          <folding>
+            <element signature="e#730#731#0" expanded="true" />
+            <element signature="e#772#773#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Berth.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
+        <state relative-caret-position="21">
+          <caret line="64" column="46" selection-start-line="64" selection-start-column="46" selection-end-line="64" selection-end-column="46" />
           <folding>
-            <element signature="e#210#211#0" expanded="true" />
-            <element signature="e#237#238#0" expanded="true" />
-            <element signature="e#2810#2811#0" expanded="true" />
-            <element signature="e#2829#2830#0" expanded="true" />
+            <element signature="e#464#465#0" expanded="true" />
+            <element signature="e#491#492#0" expanded="true" />
+            <element signature="e#2936#2937#0" expanded="true" />
+            <element signature="e#2957#2958#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pilot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="125" column="40" selection-start-line="125" selection-start-column="40" selection-end-line="125" selection-end-column="40" />
         </state>
       </provider>
     </entry>
