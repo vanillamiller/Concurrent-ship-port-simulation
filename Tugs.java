@@ -6,7 +6,13 @@ public class Tugs{
         this.availableTugs = numTugs;
     }
 
-
+    /**
+     * Removes tugs from the pilot's ship,  adds them to available tugs and notifies ships that have requested tugs
+     * that there are now tugs available
+     *
+     * @param pilot pilot that is jettisoning tugs when arrived at berth or departure
+     * @param tugsNotNeeded amount of tugs that are to be jettisoned and returned to the tug stockpile (available tugs)
+     */
     public synchronized void returnTugs(Pilot pilot, int tugsNotNeeded){
 
         pilot.alterTugs(0 - tugsNotNeeded);
@@ -16,6 +22,13 @@ public class Tugs{
         notify();
     }
 
+    /**
+     * Once the pilot has requested tugs it will take the amount it needs if there are enough tugs available, or wait
+     * until there are enough tugs available
+     *
+     * @param pilot pilot requesting tugs
+     * @param tugsNeeded the amount of tugs the pilot is requesting
+     */
     public synchronized void acquireTugs(Pilot pilot, int tugsNeeded){
 
         while(this.availableTugs < tugsNeeded) {
@@ -29,7 +42,7 @@ public class Tugs{
         System.out.println(msg);
     }
 
-     @Override
+    @Override
     public String toString(){
         return String.format("(%d available)", this.availableTugs);
     }

@@ -37,14 +37,22 @@ public class Pilot extends Thread {
 //    }
 
     private void engageDockingProcedure() {
+
+        // will not be able to engage docking until it can reserve the berth (only one ship can reserve at a time)
         berth.reserve();
-        int shieldDockingDelay = Math.abs(Params.debrisLapse() - Params.DOCKING_TIME);
+
+        // will wait to allow enough time between debris storms to dock safely
+        int shieldDockingDelay = Math.abs(Params.DEBRIS_TIME - Params.DOCKING_TIME);
+
+        // if shield is deployed wait
         while (berth.shieldDeployed()) {
             try {
                 sleep(shieldDockingDelay);
             } catch (InterruptedException e) {
             }
         }
+
+        // engage docking
         try {
             sleep(Params.DOCKING_TIME);
         } catch (InterruptedException e) {
@@ -55,7 +63,10 @@ public class Pilot extends Thread {
 
     private void engageUndockingProceedure() {
 
-            int shieldDockingDelay = Math.abs(Params.debrisLapse() - Params.UNDOCKING_TIME);
+            // wait enough time for shield to open and allow enough time to undock safely
+            int shieldDockingDelay = Math.abs(Params.DEBRIS_TIME - Params.UNDOCKING_TIME);
+
+            // if shield is deployed wait
             while (berth.shieldDeployed()) {
                 try {
 
@@ -63,6 +74,8 @@ public class Pilot extends Thread {
                 } catch (InterruptedException e) {
                 }
             }
+
+            // engage undocking
             try {
                 sleep(Params.UNDOCKING_TIME);
             } catch (InterruptedException e) {

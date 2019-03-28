@@ -1,20 +1,42 @@
+/**
+ * This class represents the USS Emaphor's berth and applies monitoring conditions to elements that do not exist
+ * in the other wait zones such:
+ *      - shield deployment
+ *      - only one ship being able to dock at once (reservation handling)
+ *
+ * @author anthonym1@student.unimelb.edu.au
+ */
 public class Berth extends WaitZone{
 
     private volatile boolean shieldDeployed;
     private volatile boolean reserved = false;
-    private final int MAX_SHIPS = 1;
 
     public Berth(String name) {
         super(name);
     }
 
+    /**
+     * Allows an operator to deploy a shield
+     */
     public synchronized void deployShield(){
         this.shieldDeployed = true;
         System.out.println("Shield is activated");
     }
 
+    /**
+     * Will dock ship as long as shield is not deployed, which entails adding it to the berth waitingShips that it
+     * inherits from the WaitZone class. Its synchronized nature will mean it will print the output message as soon as
+     * the event occurs so that the output sequencing will match the proper state transitions.
+     *
+     * The shield checking is overkill because the pilot won't engage docking proceedure unless the shield is down and this
+     * method is synchronized so the operator will not be able to run. If somehow the shield is deployed during docking
+     * and the pilot has to wait, it will instantly dock as soon as the shield is lifted instead of taking regular
+     * docking time.
+     *
+     * @param pilot
+     */
     public synchronized void dockingProcedure(Pilot pilot) {
-        while (shieldDeployed || this.numShipsWaiting() >= MAX_SHIPS){
+        while (shieldDeployed){
             try{
                 wait();
             }catch(InterruptedException e){}
@@ -25,6 +47,11 @@ public class Berth extends WaitZone{
         pilot.setStatus("docked");
     }
 
+    /**
+     * Removes the ship from the berth and the sheildDeployed is also a bit overkill as the
+     *
+     * @param pilot
+     */
     public synchronized void undockingProcedure(Pilot pilot){
         while (shieldDeployed) {
             try {
