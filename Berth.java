@@ -35,7 +35,7 @@ public class Berth extends WaitZone{
      * time. This is controlled by confirmDockingWithOperator() which will tell the operator that a ship is docking and
      * @param pilot
      */
-    public synchronized void dockingProcedure(Pilot pilot) {
+    public synchronized void completeDocking(Pilot pilot) {
 
         this.arrive(pilot.getShip());
         String msg = String.format("%s docks at berth", pilot.getShip());
@@ -51,7 +51,7 @@ public class Berth extends WaitZone{
      *
      * @param pilot wishing to complete undocking after undocking time has elapsed.
      */
-    public synchronized void undockingProcedure(Pilot pilot){
+    public synchronized void completeUndocking(Pilot pilot){
         this.depart();
         this.reserved -= 1;
         String msg = String.format("%s undocks from berth", pilot.getShip());

@@ -33,5 +33,6 @@ this by adding a boolean variable to the berth class called docking in progress,
 closing the shield whilst the ship was docking or undocking. This could lead to the USS Emafor being damaged in the
 real world so this is an issue with the system. Also, I noticed that sometimes the shield will open and the docked ship
 will not depart until it closes and opens again. I am not sure if this a problem with my monitors or just an unlucky
-combination of the loading time and shield opening and closing.
+combination of the loading time and shield opening and closing. Also a factor is the undocking time and docking time, as
+in my system a ship can only commence docking once the ship in the berth has finished undocking.
 

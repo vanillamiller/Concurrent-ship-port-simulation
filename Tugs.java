@@ -1,3 +1,10 @@
+/**
+ *  Represents the USS Emafor's tugs cache where tugs can be requested from for docking and released after docking and
+ *  departure
+ *
+ *  @author anthonym1@student.unimelb.edu.au
+ */
+
 public class Tugs{
 
     private volatile int availableTugs;

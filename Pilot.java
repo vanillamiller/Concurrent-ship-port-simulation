@@ -1,3 +1,16 @@
+/**
+ *  This class is the main actor and is responsible for transitioning the ship from arrival to departure.
+ *  A pilot's responsibilites include
+ *      - boarding and releasing ships
+ *      - moving a ship between zones at a specific speed (represented by travel time)
+ *      - docking and undocking the ship at a safe speed (represented by docking and undocking time)
+ *      - avoiding colisions with other ships and the shield when docking and undocking (reserving and confriming
+ *          docking with operator)
+ *      - acquiring and releasing tugs
+ *
+ * @author anthonym1@student.unimelb.edu.au
+ *
+ */
 public class Pilot extends Thread {
 
     // All instance variables that are described in the instantiation in Main.java
@@ -66,7 +79,7 @@ public class Pilot extends Thread {
         }
         // complete docking
         this.setStatus("docking");
-        this.berth.dockingProcedure(this);
+        this.berth.completeDocking(this);
     }
 
     /**
@@ -82,7 +95,7 @@ public class Pilot extends Thread {
             sleep(Params.UNDOCKING_TIME);
         } catch (InterruptedException e) {
         }
-        berth.undockingProcedure(this);
+        berth.completeUndocking(this);
 
     }
 
@@ -209,7 +222,7 @@ public class Pilot extends Thread {
 
 
     public void run() {
-        /* if there is a ship at arrival */
+        
 
         while (true) {
             // if at USS Emafor awaiting ship, board ship and approach berth to await docking

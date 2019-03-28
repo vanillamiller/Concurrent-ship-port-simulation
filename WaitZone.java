@@ -1,6 +1,10 @@
-
 import java.util.ArrayList;
 
+/**
+ * This class represents both the arrival and departure zone and is monitored by the arrive and depart methods
+ *
+ * @author anthonym1@student.unimelb.edu.au
+ */
 public class WaitZone {
 
     // assumed that waitZone is given a name due to constructor in skeleton Main.java

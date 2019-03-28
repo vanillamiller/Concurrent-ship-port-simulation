@@ -1,3 +1,9 @@
+/**
+ *  This class opens and closes the shields according to the debris_lapse and whether the pilot has confirmed docking
+ *  procedures
+ *
+ *  @author anthonym1@student.unimelb.edu.au
+ */
 public class Operator extends Thread {
 
     private Berth berth;
