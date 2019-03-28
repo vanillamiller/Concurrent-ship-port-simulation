@@ -3,9 +3,14 @@ import java.util.ArrayList;
 
 public class WaitZone {
 
+    // assumed that waitZone is given a name due to constructor in skeleton Main.java
     private String name;
+
+    // Place to store ships
     private volatile ArrayList<Ship> waitingShips = new ArrayList<Ship>();
-    private final int MAX_SHIPS = 2;
+
+    // Specs describe waitzones having a maximum amount of ships that can be at a zone at any one time
+    public final int MAX_SHIPS = 1;
 
     /**
      * Constructor method that sets the waitzone's name. It was assumed that the names would be used for outputting the
@@ -24,16 +29,14 @@ public class WaitZone {
         return waitingShips.size();
     }
 
-
     /**
-     * Facilitates the arrival of a ship to a waitzone by adding the ship object to the zone's waiting zone.
+     * Facilitates the arrival of a ship to a waitzone by adding the ship object to the zone's waiting zone if waitzone
+     * is not full. Will notify others that ship has arrived.
      *
      * @param arrivedShip the ship that has just arrived after approaching
-     *
-     *
      */
     public synchronized void arrive(Ship arrivedShip){
-        while(this.numShipsWaiting() >= MAX_SHIPS) {
+        while(this.numShipsWaiting() >= this.MAX_SHIPS) {
             try{
                 wait();
             } catch(InterruptedException e){}
@@ -54,11 +57,12 @@ public class WaitZone {
         while(this.numShipsWaiting() < 1){
             try{
                 wait();
-
             }catch(InterruptedException e){}
         }
+
         Ship departingShip = waitingShips.get(0);
         waitingShips.remove(0);
+
         if (this.name.equals("departure")) {
             String departureMsg = String.format("%s departs departure zone", departingShip.toString());
             System.out.println(departureMsg);
@@ -74,13 +78,17 @@ public class WaitZone {
     public synchronized void boardingProcedure(Pilot pilot){
         while(this.numShipsWaiting() < 1){
             try{
-
                 wait();
             }catch(InterruptedException e){}
         }
+
+        // get first ship in arraylist and remove it from waitingShips
         Ship acquiredShip = waitingShips.get(0);
-        waitingShips.remove(0);
+
+        // set pilots ship as this ship
         pilot.setShip(acquiredShip);
+
+        // pilot is now in a ship in the arrival zone
         pilot.setStatus("arrival zone");
         String msg = String.format("%s has acquired %s", pilot.toString(), acquiredShip.toString());
         System.out.println(msg);

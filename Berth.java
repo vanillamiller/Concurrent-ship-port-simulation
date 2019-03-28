@@ -10,7 +10,8 @@ public class Berth extends WaitZone{
 
     private volatile boolean shieldDeployed;
     private volatile boolean dockingInProgress = false;
-    private volatile boolean reserved = false;
+    private volatile int reserved = 0;
+    public final int MAX_SHIPS = 1;
 
     public Berth(String name) {
         super(name);
@@ -29,11 +30,9 @@ public class Berth extends WaitZone{
      * inherits from the WaitZone class. Its synchronized nature will mean it will print the output message as soon as
      * the event occurs so that the output sequencing will match the proper state transitions.
      *
-     * The shield checking is overkill because the pilot won't engage docking proceedure unless the shield is down and this
-     * method is synchronized so the operator will not be able to run. If somehow the shield is deployed during docking
-     * and the pilot has to wait, it will instantly dock as soon as the shield is lifted instead of taking regular
-     * docking time.
-     *
+     * There is no monitor on this method as if the shield were indeed down when entering this method then the docking
+     * time would take place in the critical section and nothing else would be able to happen in the system during that
+     * time. This is controlled by confirmDockingWithOperator() which will tell the operator that a ship is docking and
      * @param pilot
      */
     public synchronized void dockingProcedure(Pilot pilot) {
@@ -46,14 +45,15 @@ public class Berth extends WaitZone{
     }
 
     /**
-     * Removes the ship from the berth and the sheildDeployed is also a bit overkill as the
+     * Removes the ship from the berth and removes the reservation completing the undocking procedure after the undocking
+     * time has elapsed. It will notify pilots waiting to dock that they can recommence docking procedure after reserving
+     * the dock. Keeping the output statements in the synchronized block will keep output in proper sequence
      *
-     * @param pilot
+     * @param pilot wishing to complete undocking after undocking time has elapsed.
      */
     public synchronized void undockingProcedure(Pilot pilot){
-
         this.depart();
-        this.reserved = false;
+        this.reserved -= 1;
         String msg = String.format("%s undocks from berth", pilot.getShip());
         pilot.setStatus("undocked");
         this.dockingInProgress = false;
@@ -62,22 +62,33 @@ public class Berth extends WaitZone{
 
     }
 
+    /**
+     * Enables operator to deactivate shield, will notify pilots that shield has become deactivated
+     */
     public synchronized void retractShield() {
         this.shieldDeployed = false;
         System.out.println("Shield is deactivated");
         notify();
     }
 
+    /**
+     * This will enable ships to reserve a spot so that no two ships will commence docking at the same time and cause a
+     * collision in the berth
+     */
     public synchronized void reserve(){
-        while(reserved){
+        while(this.reserved >= this.MAX_SHIPS){
             try{
                 wait();
             } catch(InterruptedException e){}
         }
-        this.reserved = true;
+        this.reserved += 1;
     }
 
-    public synchronized void isShieldDeployed(){
+    /**
+     * As the shield will not be deployed once docking has commenced, this will set dockingInProgress to true and allow
+     * the ship to dock without having to abort due to the shield being activated
+     */
+    public synchronized void confirmDockingWithOperator(){
         while(shieldDeployed){
             try{
                 wait();
@@ -86,6 +97,12 @@ public class Berth extends WaitZone{
         this.dockingInProgress = true;
     }
 
+    /**
+     * Will alert the operator to whether or not a ship is currently docking and if so will not allow him to activate
+     * the shield
+     *
+     * @return whether or not a pilot in currently docking
+     */
     public boolean isDockingInProgress(){
         return dockingInProgress;
     }
