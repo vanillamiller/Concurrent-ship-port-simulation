@@ -17,7 +17,6 @@ public class Berth extends WaitZone{
         while (shieldDeployed || this.numShipsWaiting() >= MAX_SHIPS){
             try{
                 wait();
-                System.out.println("waiting at docking procedure");
             }catch(InterruptedException e){}
         }
         this.arrive(pilot.getShip());

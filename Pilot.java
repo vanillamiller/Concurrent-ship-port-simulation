@@ -32,9 +32,9 @@ public class Pilot extends Thread {
         this.arrivalZone.boardingProcedure(this);
     }
 
-    public int getAcquiredTugs() {
-        return acquiredTugs;
-    }
+//    public int getAcquiredTugs() {
+//        return acquiredTugs;
+//    }
 
     private void engageDockingProcedure() {
         berth.reserve();
@@ -146,7 +146,9 @@ public class Pilot extends Thread {
             System.out.println("dep: " + departureZone.numShipsWaiting());
             System.out.println("dep: " + departureZone.numShipsWaiting() + " " + this.toString() + ": " + this.status);
             if (this.status == Statuses.WAITING_FOR_SHIP) {
+                System.out.println("in block");
                 this.acquireShip();
+                this.arrivalZone.depart();
                 this.approachZone();
             }
             if (this.status == Statuses.WAITING_TO_DOCK) {
@@ -163,8 +165,9 @@ public class Pilot extends Thread {
             if (this.status == Statuses.WAITING_TO_DEPART) {
                 this.departureZone.arrive(this.ship);
                 this.status = Statuses.DEPARTURE;
-                tugs.returnTugs(this, this.acquiredTugs);
                 this.releaseShip();
+                tugs.returnTugs(this, this.acquiredTugs);
+
 
 
 

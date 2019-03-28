@@ -5,7 +5,7 @@ public class WaitZone {
 
     private String name;
     private volatile ArrayList<Ship> waitingShips = new ArrayList<Ship>();
-    private final int MAX_SHIPS = 2;
+    private final int MAX_SHIPS = 5;
 
     public WaitZone(String name) { this.name = name; }
 
@@ -17,14 +17,13 @@ public class WaitZone {
         while(this.numShipsWaiting() >= MAX_SHIPS) {
             try{
                 wait();
-                System.out.println("waiting at arrive");
             } catch(InterruptedException e){}
         }
         waitingShips.add(arrivedShip);
         if (this.name.equals("arrival")) {
+            System.out.println("currently in arrive: " + this.numShipsWaiting());
             String arrivalMsg = String.format("%s arrives at arrival zone", arrivedShip.toString());
             System.out.println(arrivalMsg);
-
         }
         notify();
     }
@@ -42,15 +41,15 @@ public class WaitZone {
             String departureMsg = String.format("%s departs departure zone", departingShip.toString());
             System.out.println(departureMsg);
         }
-//        notify();
+        notify();
     }
 
     // Facilitates the boarding of the ship, will make pilots wait if there are no ships available
     public synchronized void boardingProcedure(Pilot pilot){
         while(this.numShipsWaiting() < 1){
             try{
-                wait();
                 System.out.println("waiting at boarding procedure");
+                wait();
             }catch(InterruptedException e){}
         }
         Ship acquiredShip = waitingShips.get(0);

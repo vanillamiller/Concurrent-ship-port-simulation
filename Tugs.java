@@ -25,7 +25,7 @@ public class Tugs{
         }
         this.availableTugs -= tugsNeeded;
         pilot.alterTugs(tugsNeeded);
-        String msg = String.format("%s acquires %d tugs %s", this.toString(), tugsNeeded, this.toString());
+        String msg = String.format("%s acquires %d tugs %s", pilot.toString(), tugsNeeded, this.toString());
         System.out.println(msg);
     }
 
