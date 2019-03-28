@@ -8,7 +8,7 @@
  *          docking with operator)
  *      - acquiring and releasing tugs
  *
- * @author anthonym1@student.unimelb.edu.au
+ * @author anthonym1@student.unimelb.edu.au (Anthony Miller 636550)
  *
  */
 public class Pilot extends Thread {
@@ -207,14 +207,12 @@ public class Pilot extends Thread {
     /**
      * Will commence all departure duties in this order:
      *      - releasing ship
-     *      - releasing tugs
      *      - arrive at departure zone
      *      - return to USS Emafor and wait for another ship to arrive
      */
     public void engageDepartureProcedure() {
         Ship departingShip = this.ship;
         this.releaseShip();
-        tugs.returnTugs(this, this.acquiredTugs);
         this.departureZone.arrive(departingShip);
         this.setStatus("departure zone");
         this.setStatus("waiting for ship");
@@ -222,7 +220,7 @@ public class Pilot extends Thread {
 
 
     public void run() {
-        
+
 
         while (true) {
             // if at USS Emafor awaiting ship, board ship and approach berth to await docking
@@ -246,6 +244,7 @@ public class Pilot extends Thread {
             // if docked and unloaded, undock and approach departure zone
             if (this.status == Statuses.DOCKED && !this.ship.loaded) {
                 this.engageUndockingProceedure();
+                tugs.returnTugs(this, this.acquiredTugs);
                 this.approachZone();
             }
 

@@ -1,3 +1,5 @@
+Anthony Miller 636550
+
 I was inspired to construct this system in a similar way to the bank account from the lecture on monitors, as the
 spec described the zones and tugs as monitors. While the pilot had and enumerated state where transitions were controlled
 in its run() process. These states (called Statuses in the implementation) reflected the possible states of the pilot
@@ -5,7 +7,7 @@ when piloting a ship.
 
 I divided the tasks between between:
 CRITICAL:
-    - actions that had output, such that the interleving did not misallign the printed outut with the internal state,
+    - actions that had output, such that the interleving did not malign the printed output with the internal state,
       where the time it took to execute these processes were taken out of the critical sections.
         - shield being activated/deactivated
         - reserving the berth, docking and undocking

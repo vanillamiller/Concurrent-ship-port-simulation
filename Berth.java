@@ -4,7 +4,7 @@
  *      - shield deployment
  *      - only one ship being able to dock at once (reservation handling)
  *
- * @author anthonym1@student.unimelb.edu.au
+ * @author anthonym1@student.unimelb.edu.au (Anthony Miller 636550)
  */
 public class Berth extends WaitZone{
 

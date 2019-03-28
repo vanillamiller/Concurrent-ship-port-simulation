@@ -2,7 +2,7 @@
  *  Represents the USS Emafor's tugs cache where tugs can be requested from for docking and released after docking and
  *  departure
  *
- *  @author anthonym1@student.unimelb.edu.au
+ *  @author anthonym1@student.unimelb.edu.au (Anthony Miller 636550)
  */
 
 public class Tugs{

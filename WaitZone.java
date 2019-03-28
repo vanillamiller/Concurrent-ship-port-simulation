@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * This class represents both the arrival and departure zone and is monitored by the arrive and depart methods
  *
- * @author anthonym1@student.unimelb.edu.au
+ * @author anthonym1@student.unimelb.edu.au (Anthony Miller 636550)
  */
 public class WaitZone {
 
@@ -15,7 +15,7 @@ public class WaitZone {
 
     // Specs describe waitzones having a maximum amount of ships that can be at a zone at any one time
     // specs said set it to 1
-    public final int MAX_SHIPS = 2;
+    public final int MAX_SHIPS = 1;
 
     /**
      * Constructor method that sets the waitzone's name. It was assumed that the names would be used for outputting the
