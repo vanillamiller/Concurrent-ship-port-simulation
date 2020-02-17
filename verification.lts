@@ -1,0 +1,111 @@
+// Anthony Miller 636550 anthonym1@student.unimelb.edu.au
+
+const NUM_PILOTS = 5
+range Pilots = 1..NUM_PILOTS
+const NUM_TUGS = 15
+const DOCKING_TUGS = 3
+const UNDOCKING_TUGS = 2
+const ZONE_SIZE = 2
+const BERTH_SIZE = 1
+const False = 0
+const True = 1
+range Bool = False..True
+
+// Producer from scaffolding code, puts ship into arrival zone
+PRODUCER = (produce -> PRODUCER).
+
+// Consumer from scaffolding code, removes ships from departure zone
+CONSUMER = (consume -> CONSUMER).
+
+// State changes for the pilot encapulate .run() from assignment 1b
+PILOT = ( wait_for_ship -> acquire_ship -> acquire_tugs -> wait_to_dock ->
+		  dock -> return_unneeded_tugs -> unload -> undock -> 
+		  return_all_tugs -> wait_to_depart -> enter_departure -> 
+		  return_to_USSEmafor -> PILOT
+		).
+
+// Switches the shield on and off
+OPERATOR = (shield_activated -> shield_deactivated -> OPERATOR).
+
+// Will only allow docking for vacant docking bays... size of docking bay may be altered for expansion
+BERTH_LOCK = BERTH[0][False],
+	BERTH[i:0..BERTH_SIZE][shield:Bool] = 
+
+		// if shield is down and there is a vacancy in the berth then allow pilot to dock
+		( when(i < BERTH_SIZE && !shield) pilot[p:Pilots].dock -> BERTH[i + 1][shield]
+
+		// if shield is down then allow the pilot to undock
+		| when(i > 0 && !shield) pilot[p:Pilots].undock -> BERTH[i - 1][shield]
+
+		// allows operator to de/activate shield
+		| when(shield) shield_deactivated -> BERTH[i][False]
+		| when(!shield) shield_activated -> BERTH[i][True]
+		).
+
+// represents WaitZone classes: arrival and departure
+WAIT_ZONES = WZ[0][0], 
+	WZ[arr_ships:0..ZONE_SIZE][dep_ships:0..ZONE_SIZE] =
+
+		// if there is a ship in the arrival zone while the pilot is waiting then acquire this ship
+		( when(arr_ships > 0) pilot[p:Pilots].acquire_ship -> WZ[arr_ships-1][dep_ships]
+		
+		// if there is a vacancy in the departure zone then enter departure zone
+		| when(dep_ships < ZONE_SIZE) pilot[p:Pilots].enter_departure -> WZ[arr_ships][dep_ships+1]
+
+		// if there is a vacancy in the arrival zone then fill it with the next arriving ship
+		| when(arr_ships < ZONE_SIZE) produce -> WZ[arr_ships+1][dep_ships]
+
+		// if there are ships waiting to leave the departurezone then
+		| when(dep_ships > 0) consume -> WZ[arr_ships][dep_ships-1]
+		).
+
+// Semaphore type tugs locking machanism
+TUGS_LOCK = TUGS[NUM_TUGS],
+	TUGS[available_tugs:0..NUM_TUGS] = 
+
+		// if there are available tugs, then allow pilot to take tugs
+		( when(available_tugs >= DOCKING_TUGS) 
+			pilot[p:Pilots].acquire_tugs -> TUGS[available_tugs - DOCKING_TUGS]
+
+		// stops tugs from overflowing (removes error state from FSP)
+		| when(available_tugs <= (NUM_TUGS - (DOCKING_TUGS - UNDOCKING_TUGS)))
+			pilot[p:Pilots].return_unneeded_tugs -> TUGS[available_tugs + (DOCKING_TUGS - UNDOCKING_TUGS)]
+		
+		// stops tugs from overflowing (removes error state from FSP)
+		| when(available_tugs <= (NUM_TUGS - UNDOCKING_TUGS)) 
+			pilot[p:Pilots].return_all_tugs -> TUGS[available_tugs + UNDOCKING_TUGS]
+		).
+
+// Zones in the assignment 
+|| ZONES = (WAIT_ZONES || BERTH_LOCK || TUGS_LOCK ).
+
+// Threads in the assignment 
+|| PROCESSES = ( CONSUMER || PRODUCER || pilot[Pilots]:OPERATOR || pilot[Pilots]:PILOT ).
+
+// Main process from assignment
+|| MAIN = ( PROCESSES || ZONES ).
+
+// make sure shield always works
+progress SHIELD_ACTIVATED = {shield_activated}
+progress SHIELD_DEACTIVATED = {shield_deactivated}
+
+// ships will always be allowed to arrive and leave the USSEmafor itself
+progress ALWAYS_ARRIVING = {produce}
+progress ALWAYS_LEAVING = {consume}
+
+
+// make sure that once a pilot has acquired a ship they will be able to complete their journey
+assert ALWAYS_COMPLETE_TRIP 
+	= forall[p:Pilots]
+		[](pilot[p].acquire_ship -> <>pilot[p].return_to_USSEmafor)
+
+// if a pilot acquires tugs, and if all pilots must complete their journeys, then all pilots must return all
+// at some point
+assert ALWAYS_RETURN_TUGS
+	= forall[p:Pilots]
+		[](pilot[p].acquire_tugs -> <>pilot[p].return_all_tugs)
+
+// if a pilot docks at the berth then they must eventually leave
+assert ALWAYS_UNDOCK
+	= forall[p:Pilots]
+		[](pilot[p].dock -> <>pilot[p].undock)
