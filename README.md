@@ -1,4 +1,4 @@
-# Space station cuncurrent simulation
+# Space station concurrent simulation
 
 This program concurrently simulates a space station with ships coming into dock, docking and unloading, and leaving. The shield will be deployed every so often not allowing undocked ships to dock and docked ships to undock. It prints these actions to the console.
 
