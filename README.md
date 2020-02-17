@@ -2,7 +2,7 @@
 
 This program concurrently simulates a space station with ships coming into dock, docking and unloading, and leaving. The shield will be deployed every so often not allowing undocked ships to dock and docked ships to undock. It prints these actions to the console.
 
-An Labelled Transtitioned System Analyser (LTSA) file is also included for verifying the integrity of the concurrent system.
+An Labelled Transtitioned System Analyser (LTSA) file (verification.lts) is also included for verifying the integrity of the concurrent system.
 
 Skeleton code by Nick Geard, concurrency and locking mechanisms by Anthony Miller.
 
